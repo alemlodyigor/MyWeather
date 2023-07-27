@@ -1,0 +1,179 @@
+@mixin moredata {
+  background-color: var(--color-white-secondary);
+  color: var(--color-grey-primary);
+  box-shadow: 0px 1px 13px -5px var(--box-shadow-color-grey);
+
+  margin-top: 1.5rem;
+  border-radius: 1rem;
+  padding: 1rem 0.5rem;
+  width: 84.4rem;
+  @media only screen and (max-width: 1103px) {
+    width: 100vw;
+  }
+}
+@mixin moredatahourly {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 4fr 1fr 1fr;
+  justify-items: center;
+}
+.header {
+  font-size: 1.4rem;
+}
+
+.container-main {
+  display: flex;
+
+  gap: 2%;
+  grid-column: 2 / 3;
+  @media only screen and (max-width: 1103px) {
+    grid-column: 1 / -1;
+    flex-direction: column;
+  }
+}
+
+.main-content {
+  flex: 0 0 70%;
+  background-color: transparent;
+  color: var(--color-grey-primary);
+  padding: 0rem 1rem 1rem 0rem;
+  @media only screen and (max-width: 1103px) {
+    padding: 0;
+  }
+  border-radius: 1rem;
+}
+
+.more-container {
+  @media only screen and (max-width: 1103px) {
+    width: 100vw;
+  }
+  &__important {
+    padding: 1rem;
+    box-shadow: 0px 1px 13px -5px var(--box-shadow-color-grey);
+
+    background-color: var(--color-white-secondary);
+    color: var(--color-grey-primary);
+    margin-top: 1.5rem;
+    border-radius: 1rem;
+
+    &__data {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+      padding: 1rem;
+      column-gap: 4%;
+      @media only screen and (max-width: 390px) {
+        width: 100%;
+        padding: 0;
+      }
+      &__details {
+        display: grid;
+        grid-template-columns: 0.2fr 1fr 1fr;
+        grid-template-rows: repeat(2, 1fr);
+
+        &__p1 {
+          align-self: center;
+        }
+
+        &__p2 {
+          justify-self: right;
+          align-self: center;
+        }
+
+        &__hr {
+          height: 0;
+          grid-column: 1 / -1;
+          grid-row: 2 / 3;
+        }
+      }
+    }
+  }
+
+  &__temp {
+    @include moredata;
+    &__h3 {
+    }
+
+    &__data {
+      display: grid;
+      grid-template-columns: repeat(24, 1fr);
+
+      overflow-x: scroll;
+
+      &__hourly {
+        @include moredatahourly;
+        &__img {
+        }
+
+        &__ptemp {
+        }
+
+        &__hour {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  &__wind {
+    @include moredata;
+    &__h3 {
+    }
+
+    &__data {
+      display: grid;
+      grid-template-columns: repeat(24, 1fr);
+      column-gap: 1.5rem;
+
+      overflow-x: scroll;
+      &__hourly {
+        @include moredatahourly;
+
+        &__img {
+          font-size: 4.8rem;
+        }
+
+        &__pwind {
+        }
+
+        &__hour {
+        }
+      }
+    }
+  }
+
+  &__precipitation {
+    @include moredata;
+    &__h3 {
+    }
+
+    &__data {
+      display: grid;
+      grid-template-columns: repeat(24, 1fr);
+      column-gap: 1.5rem;
+
+      overflow-x: scroll;
+      &__hourly {
+        display: grid;
+        margin-top: 0.5rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        justify-items: center;
+        row-gap: 0.5rem;
+
+        &__p {
+        }
+      }
+    }
+  }
+}
+
+.heading__important__data {
+  grid-column: 1 / -1;
+  grid-row: 1 / span 2;
+  margin-top: 1rem;
+}
+
+.span__important__data {
+  grid-column: 1 / -1;
+  margin-bottom: 3rem;
+}

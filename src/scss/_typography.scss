@@ -1,0 +1,12 @@
+.heading-2 {
+  font-size: 4.5rem;
+}
+
+a:link,
+a:visited {
+  color: var(--color-grey-primary);
+}
+a:hover,
+a:active {
+  color: var(--color-grey-secondary);
+}

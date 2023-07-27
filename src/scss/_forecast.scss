@@ -1,0 +1,40 @@
+.forecast-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 1.5rem 0rem;
+
+  background-color: var(--color-white-secondary);
+  color: var(--color-grey-primary);
+  box-shadow: 0px 1px 13px -5px var(--box-shadow-color-grey);
+
+  border-radius: 1rem;
+
+  &__day {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem;
+    padding: 1rem;
+    cursor: pointer;
+    @media only screen and (max-width: 399px) {
+      font-size: 1.4rem;
+    }
+
+    &:hover {
+      background-color: var(--color-white-primary);
+    }
+
+    &__name {
+    }
+
+    &__temp {
+    }
+
+    &__img {
+    }
+
+    &__precipitation {
+    }
+  }
+}
