@@ -34,6 +34,9 @@
 
   &__main-title {
     grid-column: 1 / 2;
+    & > span {
+      font-size: 1rem;
+    }
   }
 
   &__form {

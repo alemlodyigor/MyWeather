@@ -63,6 +63,17 @@ const getID = function (id) {
     return [lat, lon];
 }
 
+export const getIP = async function(){
+    try{
+        const {ip} = await getJSON("https://api.ipify.org?format=json");
+        const data = await getJSON(`https://ipapi.co/${ip}/json/`);
+        const {latitude,longitude} = data;
+        return [latitude, longitude];
+    } catch (err){
+        console.error(err);
+    }
+}
+
 export const updateData = function (dateTime){
     const forecastArray = state.weather.forecast.forecastday;
     const forecastDay  = [forecastArray.find(e => e.date_epoch === dateTime)];
@@ -78,7 +89,7 @@ export const getActualData = async function(info) {
         state.current = data.current;
         state.forecast = data.forecast;
         state.weather = data;
- 
+        
         saveSearchData();
 
     } catch (err) {

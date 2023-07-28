@@ -25,11 +25,11 @@ const controlSearchResults = async function () {
     }
 }
 
-const renderSearchedResult = async function (id, status=true) {
+const renderSearchedResult = async function (id, status=true, first=false) {
     try {
         status===true ? searchView._toggleResultWindow() : '';
-        
-        await model.getActualData(id);
+        const coordinates = await model.getIP();
+        first===true ? await model.getActualData(coordinates) : await model.getActualData(id);
 
         weatherView.render(model.state.location, model.state.current, model.state.forecast);
 
@@ -74,6 +74,8 @@ const renderFutureWeather = async function(dateTime){
 }
 
 const init = function () {
+    renderSearchedResult('', false, true);
+
     searchWeather._addSearchHandler(controlSearchResults);
 
     searchView._addResultHandler(renderSearchedResult);
