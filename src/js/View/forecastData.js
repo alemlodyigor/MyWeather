@@ -7,7 +7,7 @@ class forecastData extends View{
     _generateWeather(){
         return `
         <section class="more-container__important">
-        <h3 class="more-container__important__h3">${this._displayDate(this._date.forecast.forecastday[0].date_epoch, this._date.language.displayDate)}'s forecast</h3>
+        <h3 class="more-container__important__h3">${this._displayDate(this._date.forecast.forecastday[0].date_epoch, this._date.language.displayDate)}</h3>
         <div class="more-container__important__data">
             <h2 class="heading-2 heading__important__data">${this._date.forecast.forecastday[0].day.avgtemp_c}℃</h2>
             <span class="span span__important__data">${this._date.language.forecastData.feelsLike}</span>
