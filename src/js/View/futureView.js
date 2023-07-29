@@ -9,11 +9,11 @@ class futureView extends View {
         return `
             <div class="actual-container__actual__state">
             <h3>${this._date.location.name}, &nbsp;</h3>
-            <span>${this._displayDate(this._date.forecast.forecastday[0].date_epoch)}, ${this._date.forecast.forecastday[0].date}</span>
+            <span>${this._displayDate(this._date.forecast.forecastday[0].date_epoch, this._date.language.displayDate)}, ${this._date.forecast.forecastday[0].date}</span>
             </div>
             <h2 class="actual-container__actual__temp">${this._date.forecast.forecastday[0].day.avgtemp_c}℃</h2>
 
-            <img src="//${this._date.forecast.forecastday[0].day.condition.icon}" alt="" class="actual-container__actual__image">
+            <img src="${this._date.forecast.forecastday[0].day.condition.icon}" alt="" class="actual-container__actual__image">
 
             <h3 class="actual-container__actual__condition">${this._date.forecast.forecastday[0].day.condition.text}</h3>
 

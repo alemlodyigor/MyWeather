@@ -5,7 +5,7 @@ class forecastPrecipitation extends View {
 
     _generateWeather(){
         return `
-            <h2 class="more-container__precipitation__h3">Precipitation</h2>
+            <h2 class="more-container__precipitation__h3">${this._date.language.forecastPrecipitation}</h2>
             <div class="more-container__precipitation__data">
                 ${this._date.forecast.forecastday[0].hour.map(hour => {
                 return `

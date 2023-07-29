@@ -9,7 +9,7 @@ class weatherView extends View {
         return `
             <div class="actual-container__actual__state">
             <h3>${this._date.location.name}, &nbsp;</h3>
-            <span>Last updated: ${this._displayHour(this._date.current.last_updated_epoch)}</span>
+            <span>${this._date.language.lastUpdated} ${this._displayHour(this._date.current.last_updated_epoch)}</span>
             </div>
             <h2 class="actual-container__actual__temp">${this._date.current.temp_c}℃</h2>
 

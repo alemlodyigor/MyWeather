@@ -5,7 +5,7 @@ class forecastTemp extends View {
 
     _generateWeather(){
         return `
-            <h3 class="more-container__temp__h3">Temperature</h3>
+            <h3 class="more-container__temp__h3">${this._date.language.forecastTemp}</h3>
             <div class="more-container__temp__data">
                 ${this._date.forecast.forecastday[0].hour.map(hour => {
                     return `

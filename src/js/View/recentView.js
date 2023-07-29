@@ -5,10 +5,10 @@ class recentView extends View {
 
     _generateRecent(){
         return `
-            <h3 class="recent__h3">Recent searches</h3>
+            <h3 class="recent__h3">${this._date.language.recentSearches}</h3>
             <hr>
             <div class="recent__searches">
-                ${this._date.map(el => {
+                ${this._date.recent.map(el => {
                     return `
                     <div class="recent__searches__element" data-lat="${el.lat}" data-lon="${el.lon}">
                         <img src="${el.img}" alt="" class="recent__searches__element__img">

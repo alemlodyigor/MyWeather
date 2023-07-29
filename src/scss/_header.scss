@@ -20,15 +20,34 @@
   grid-template-rows: 1fr;
   padding: 2rem;
   position: relative;
+  @media only screen and (max-width: 371px) {
+    padding: 2rem 0rem 2rem 0rem;
+  }
 
-  &__theme {
+  &__options {
     grid-column: 3 / 4;
     align-self: center;
     justify-self: center;
     cursor: pointer;
+
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
     @media only screen and (max-width: 1103px) {
       justify-self: left;
       margin-left: 2rem;
+    }
+
+    &__theme {
+      cursor: pointer;
+    }
+
+    &__lang {
+      &__select {
+        cursor: pointer;
+        border: none;
+      }
     }
   }
 

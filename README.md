@@ -1,6 +1,7 @@
 # MyW - Weather Application
 
-MyW is simple weather app where you can check weather forecast for any city.
+MyW is simple weather app where you can check weather forecast for any city. <br>
+Available languages: english, polish, deutsch <br>
 
 # Link to hosted website: 
 https://myweatherami.netlify.app/ <br>
@@ -18,4 +19,5 @@ Step 4: Open config.js and paste your API key in variable called 'KEY' <br>
 And that's all, now you can use application!
 
 # List of updates
+1.0.2 - Fixed look on phones, added new languages <br>
 1.0.1 - Added automatic weather search by IP

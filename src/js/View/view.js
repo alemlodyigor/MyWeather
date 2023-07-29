@@ -2,20 +2,20 @@ export default class View {
     _date;
     _data = new Date();
 
-    render(location, current, forecast) {
-        if (!location || !current || !forecast) return this._errorMessage;
+    render(location, current, forecast, language) {
+        if (!location || !current || !forecast || !language) return this._errorMessage;
 
-        this._date = {location: location, current: current, forecast: forecast};
+        this._date = {location: location, current: current, forecast: forecast, language: language};
         const html = this._generateWeather();
 
         this._clear();
         this._parentElement.insertAdjacentHTML('afterbegin', html);
     }
 
-    renderRecent(data) {
-        if (!data) return;
+    renderRecent(recent, language) {
+        if (!recent || !language) return;
 
-        this._date = data;
+        this._date = {recent: recent, language: language};
         const html = this._generateRecent();
         this._clear();
         this._parentElement.insertAdjacentHTML('afterbegin', html);
@@ -46,7 +46,7 @@ export default class View {
         return day;
     }
 
-    _displayDate(epoch) {
+    _displayDate(epoch, lang) {
         const actualDay = new Date(this._data).getDate();
         const utcSeconds = epoch;
         const datetime = new Date(0);
@@ -54,17 +54,18 @@ export default class View {
         const futureDay = datetime.getDate();
         const day = Math.abs(futureDay - actualDay);
 
-        if (day === 0) return 'Today';
-        if (day === 1) return 'Tomorrow';
-        if (day === 2) return 'After tomorrow';
+        if (day === 0) return lang.today;
+        if (day === 1) return lang.tomorrow;
+        if (day === 2) return lang.afterTomorrow;
     }
 
     _displayHour(epoch) {
-        const epochNumber = epoch;
+        const date = new Date(epoch * 1000);
         const options = {
             hour: "numeric",
             minute: "numeric",
+            timeZone: "Europe/Warsaw",
         }
-        return new Intl.DateTimeFormat("en-US", options).format(epochNumber);
+        return new Intl.DateTimeFormat("en-US", options).format(date);
     }
 }

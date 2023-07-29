@@ -10,6 +10,7 @@ import forecastWind from "./View/forecastWind.js";
 import recentView from "./View/recentView.js";
 import forecastPrecipitation from "./View/forecastPrecipitation.js";
 import darkView from "./View/darkView.js";
+import langView from "./View/langView.js";
 
 const controlSearchResults = async function () {
     try {
@@ -25,23 +26,25 @@ const controlSearchResults = async function () {
     }
 }
 
-const renderSearchedResult = async function (id, status=true, first=false) {
+const renderSearchedResult = async function (id, status=true, first=false, change=false) {
     try {
-        status===true ? searchView._toggleResultWindow() : '';
-        const coordinates = await model.getIP();
-        first===true ? await model.getActualData(coordinates) : await model.getActualData(id);
+        let coordinates;
+        status === true ? searchView._toggleResultWindow() : '';
+        change === true ? '' : coordinates = await model.getIP();
+        first === true ? await model.getActualData(coordinates) : await model.getActualData(id);
+        searchWeather._clearInput();
 
-        weatherView.render(model.state.location, model.state.current, model.state.forecast);
+        weatherView.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
 
-        forecastData.render(model.state.location, model.state.current, model.state.forecast);
+        forecastData.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
 
-        forecastTemp.render(model.state.location, model.state.current, model.state.forecast);
-        forecastWind.render(model.state.location, model.state.current, model.state.forecast);
-        forecastPrecipitation.render(model.state.location, model.state.current, model.state.forecast);
+        forecastTemp.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
+        forecastWind.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
+        forecastPrecipitation.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
 
-        forecastView.render(model.state.location, model.state.current, model.state.forecast);
+        forecastView.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
 
-        recentView.renderRecent(model.state.recent);
+        recentView.renderRecent(model.state.recent, model.state.language);
 
         getColor();
 
@@ -56,13 +59,13 @@ const renderFutureWeather = async function(dateTime){
     try {
         model.updateData(dateTime);
 
-        futureView.render(model.state.location, model.state.current, model.state.forecast);
+        futureView.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
 
-        forecastData.render(model.state.location, model.state.current, model.state.forecast);
+        forecastData.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
 
-        forecastTemp.render(model.state.location, model.state.current, model.state.forecast);
-        forecastWind.render(model.state.location, model.state.current, model.state.forecast);
-        forecastPrecipitation.render(model.state.location, model.state.current, model.state.forecast);
+        forecastTemp.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
+        forecastWind.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
+        forecastPrecipitation.render(model.state.location, model.state.current, model.state.forecast, model.state.language);
 
         getColor();
 
@@ -71,23 +74,6 @@ const renderFutureWeather = async function(dateTime){
     } catch (err) {
         console.error(err);
     }
-}
-
-const init = function () {
-    renderSearchedResult('', false, true);
-
-    searchWeather._addSearchHandler(controlSearchResults);
-
-    searchView._addResultHandler(renderSearchedResult);
-
-    forecastView._addFutureHandler(renderFutureWeather);
-
-    model.loadSearchData();
-    recentView.renderRecent(model.state.recent);
-
-    recentView._addResultHandler(renderSearchedResult);
-
-    darkView._addSwitchThemeHandler(themeSwitch);
 }
 
 const getColor = function(){
@@ -107,14 +93,40 @@ const themeSwitch = function(contain){
     if(contain){
         root.style.setProperty("--color-white-secondary", '#303030');
         root.style.setProperty("--color-grey-primary", '#e9ecef');
-        root.style.setProperty("--box-shadow-color-grey", "rgb(220, 221, 231, 1)")
+        root.style.setProperty("--box-shadow-color-grey", "rgb(220, 221, 231, 1)");
+        root.style.setProperty("--color-white-primary", '#5e6b77');
     }
 
     if(!contain){
         root.style.setProperty("--color-white-secondary", '#fff');
         root.style.setProperty("--color-grey-primary", '#303030');
+        root.style.setProperty("--color-white-primary", '#e9ecef');
         root.style.setProperty("--box-shadow-color-grey", "rgba(66, 68, 90, 1)")
     }
+}
+
+const changeLanguage = function(code){
+    model.changeLang(code);
+    renderSearchedResult([model.state.location.lat, model.state.location.lon], false, false, true);
+}
+
+const init = function () {
+    renderSearchedResult('', false, true);
+
+    langView._addChangeLangHandler(changeLanguage);
+
+    searchWeather._addSearchHandler(controlSearchResults);
+
+    searchView._addResultHandler(renderSearchedResult);
+
+    forecastView._addFutureHandler(renderFutureWeather);
+
+    model.loadSearchData();
+    recentView.renderRecent(model.state.recent);
+
+    recentView._addResultHandler(renderSearchedResult);
+
+    darkView._addSwitchThemeHandler(themeSwitch);
 }
 
 init();

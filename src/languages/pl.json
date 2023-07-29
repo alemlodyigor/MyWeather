@@ -1,0 +1,26 @@
+{
+  "pl": {
+    "title": "MyW - Aplikacja pogodowa",
+    "lastUpdated": "Aktualizacja:",
+    "searchPlaceholder": "Szukaj",
+
+    "forecastData": {
+      "feelsLike": "Odczuwalna",
+      "cloudy": "Zachmurzenie",
+      "visibility": "Widoczność",
+      "humidity": "Wilgotność",
+      "moonPhase": "Faza księżyca"
+    },
+
+    "forecastPrecipitation": "Opady",
+    "forecastTemp": "Temperatura",
+    "forecastWind": "Prędkość wiatru",
+    "recentSearches": "Ostatnie wyszukiwania",
+
+    "displayDate": {
+      "today": "Dziś",
+      "tomorrow": "Jutro",
+      "afterTomorrow": "Pojutrze"
+    }
+  }
+}

@@ -1,6 +1,8 @@
 import { API_URL, LANGUAGE, DAYS, KEY } from './config.js'
 import { getJSON } from './helpers.js';
+import languages from '../languages/langConfig.js';
 
+const langPack = languages;
 export const state = {
     currentColor: [],
     colors: [
@@ -48,6 +50,9 @@ export const state = {
     },
     search: [],
     recent: [],
+    code: "",
+    language: {
+    }
 }
 
 export const findColor = function(){
@@ -63,11 +68,23 @@ const getID = function (id) {
     return [lat, lon];
 }
 
+export const changeLang = function (code) {
+    state.code = code;
+    state.language = langPack[code];
+    document.documentElement.setAttribute("lang", code);
+    document.title = state.language.title;
+    document.querySelector('.nav-menu__form__search-field').placeholder = state.language.searchPlaceholder;
+}
+
 export const getIP = async function(){
     try{
         const {ip} = await getJSON("https://api.ipify.org?format=json");
         const data = await getJSON(`https://ipapi.co/${ip}/json/`);
-        const {latitude,longitude} = data;
+        const {latitude,longitude, languages} = data;
+        state.code = languages.split(",")[0].split("-")[0];
+
+        changeLang(state.code);
+
         return [latitude, longitude];
     } catch (err){
         console.error(err);
@@ -84,7 +101,7 @@ export const getActualData = async function(info) {
     try{
         const coordinates = Number.isInteger(info) ? getID(info) : info;
         const [lat, lon] = coordinates; 
-        const data = await getJSON(`${API_URL}${KEY}&q=${lat},${lon}${LANGUAGE}${DAYS}`);
+        const data = await getJSON(`${API_URL}${KEY}&q=${lat},${lon}&lang=${state.code}${DAYS}`);
         state.location = data.location;
         state.current = data.current;
         state.forecast = data.forecast;

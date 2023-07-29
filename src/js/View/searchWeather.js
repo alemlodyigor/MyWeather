@@ -25,6 +25,12 @@ class searchWeather extends View {
         this._parentElement.addEventListener('keydown', e => {
             clearTimeout(timeoutId);
         })
+
+        this._parentElement.addEventListener('submit', (e)=> {
+            e.preventDefault();
+            handler();
+            clearTimeout(timeoutId);
+        })
     }
 }
 

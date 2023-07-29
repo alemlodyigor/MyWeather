@@ -1,0 +1,26 @@
+{
+  "en": {
+    "title": "MyW - Weather App",
+    "lastUpdated": "Last updated: ",
+    "searchPlaceholder": "Search city",
+
+    "forecastData": {
+      "feelsLike": "Feels like",
+      "cloudy": "Cloud",
+      "visibility": "Visibility",
+      "humidity": "Humidity",
+      "moonPhase": "Moon phase"
+    },
+
+    "forecastPrecipitation": "Precipitation",
+    "forecastTemp": "Temperature",
+    "forecastWind": "Wind speed",
+    "recentSearches": "Recent searches",
+
+    "displayDate": {
+      "today": "Today",
+      "Tomorrow": "Tomorrow",
+      "afterTomorrow": "After tomorrow"
+    }
+  }
+}
