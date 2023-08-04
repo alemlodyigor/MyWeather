@@ -19,7 +19,7 @@
 
     "displayDate": {
       "today": "Today",
-      "Tomorrow": "Tomorrow",
+      "tomorrow": "Tomorrow",
       "afterTomorrow": "After tomorrow"
     }
   }

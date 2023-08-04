@@ -82,7 +82,7 @@ export const getIP = async function(){
         const data = await getJSON(`https://ipapi.co/${ip}/json/`);
         const {latitude,longitude, languages} = data;
         state.code = languages.split(",")[0].split("-")[0];
-
+        if(state.code !== 'pl' && state.code !== 'en') state.code = 'en';
         changeLang(state.code);
 
         return [latitude, longitude];
@@ -106,7 +106,7 @@ export const getActualData = async function(info) {
         state.current = data.current;
         state.forecast = data.forecast;
         state.weather = data;
-        
+
         saveSearchData();
 
     } catch (err) {

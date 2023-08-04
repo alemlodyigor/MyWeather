@@ -7,9 +7,20 @@ export default class View {
 
         this._date = {location: location, current: current, forecast: forecast, language: language};
         const html = this._generateWeather();
-
+        this._clearSpinner();
         this._clear();
         this._parentElement.insertAdjacentHTML('afterbegin', html);
+    }
+
+    renderSpinner(){
+        const markup = `<div class="custom-loader"></div>`;
+        document.querySelector('.renderSpinner').classList.remove('hidden2');
+        document.querySelector('.renderSpinner').insertAdjacentHTML('afterbegin', markup);
+    }
+
+    _clearSpinner(){
+        document.querySelector('.renderSpinner').innerHTML = '';
+        document.querySelector('.renderSpinner').classList.add('hidden2');
     }
 
     renderRecent(recent, language) {
@@ -53,7 +64,7 @@ export default class View {
         datetime.setUTCSeconds(utcSeconds);
         const futureDay = datetime.getDate();
         const day = Math.abs(futureDay - actualDay);
-
+        
         if (day === 0) return lang.today;
         if (day === 1) return lang.tomorrow;
         if (day === 2) return lang.afterTomorrow;

@@ -28,6 +28,7 @@ const controlSearchResults = async function () {
 
 const renderSearchedResult = async function (id, status=true, first=false, change=false) {
     try {
+        weatherView.renderSpinner();
         let coordinates;
         status === true ? searchView._toggleResultWindow() : '';
         change === true ? '' : coordinates = await model.getIP();
@@ -76,6 +77,15 @@ const renderFutureWeather = async function(dateTime){
     }
 }
 
+const closeDownload = function(){
+    const parentEl = document.querySelector('.important');
+    const btn = document.querySelector('.close_download');
+
+    btn.addEventListener('click', (e)=>{
+        parentEl.remove();
+    })
+}
+
 const getColor = function(){
     model.findColor();
 }
@@ -111,6 +121,8 @@ const changeLanguage = function(code){
 }
 
 const init = function () {
+    closeDownload();
+
     renderSearchedResult('', false, true);
 
     langView._addChangeLangHandler(changeLanguage);

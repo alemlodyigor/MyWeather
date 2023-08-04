@@ -45,6 +45,51 @@ body {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.important {
+  grid-column: 1 / -1;
+  background-color: var(--color-white-secondary);
+  color: var(--color-grey-primary);
+  padding: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content:center;
+  font-size: 1.8rem;
+}
+
+.close_download{
+  cursor: pointer;
+}
+
+.renderSpinner {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.hidden2{
+  visibility: hidden;
+}
+
+.custom-loader {
+  width: 6.4rem;
+  height: 6.4rem;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: #e4e4ed;
+  border-right-color: #766df4;
+  animation: s2 1s infinite linear;
+}
+@keyframes s2 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 // SCROLLBAR
 * {
   scrollbar-width: thin;
