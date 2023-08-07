@@ -1,8 +1,20 @@
-import { API_URL, LANGUAGE, DAYS, KEY } from './config.js'
+import { API_URL, LANGUAGE, DAYS } from './config.js'
 import { getJSON } from './helpers.js';
 import languages from '../languages/langConfig.js';
+require('dotenv').config();
 
 const langPack = languages;
+
+const getHour = (epoch) => {
+    const hour = new Date(epoch * 1000);
+    const options = {
+        hour: "numeric",
+        timeZone: "Europe/Warsaw",
+        hour12: false,
+    }
+    return new Intl.DateTimeFormat("en-US", options).format(hour);
+}
+
 export const state = {
     currentColor: [],
     colors: [
@@ -101,11 +113,12 @@ export const getActualData = async function(info) {
     try{
         const coordinates = Number.isInteger(info) ? getID(info) : info;
         const [lat, lon] = coordinates; 
-        const data = await getJSON(`${API_URL}${KEY}&q=${lat},${lon}&lang=${state.code}${DAYS}`);
+        const data = await getJSON(`${API_URL}key=${process.env.WEATHER_API_KEY}&q=${lat},${lon}&lang=${state.code}${DAYS}`);
         state.location = data.location;
         state.current = data.current;
         state.forecast = data.forecast;
         state.weather = data;
+        state.weather.forecast.forecastday[0].hour = state.weather.forecast.forecastday[0].hour.slice(getHour(state.current.last_updated_epoch));
 
         saveSearchData();
 
@@ -156,7 +169,7 @@ export const loadSearchData = function () {
 }
 
 export const searchActualData = async function (query) {
-    const searchData = await getJSON(`https://api.weatherapi.com/v1/search.json?${KEY}&q=${query}${LANGUAGE}`);
+    const searchData = await getJSON(`https://api.weatherapi.com/v1/search.json?key=${process.env.WEATHER_API_KEY}&q=${query}${LANGUAGE}`);
 
     state.search = searchData;
     
