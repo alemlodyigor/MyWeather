@@ -6,7 +6,7 @@ Available languages: english, polish <br>
 # Link to hosted website:
 
 https://myweatherami.netlify.app/ <br>
-https://alestaryigor.ct8.pl/myw/ <br>
+https://alemlodyigor.pl/myw/ <br>
 
 If you enjoy my project please leave a star.
 
