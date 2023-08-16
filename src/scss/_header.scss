@@ -15,6 +15,12 @@
 }
 
 .nav-menu {
+  &__logo{
+    width: 10rem;
+    @media only screen and (max-width:400px){
+      width: 5rem;
+    }
+  }
   display: grid;
   grid-template-columns: 1fr 2.1fr 1fr;
   grid-template-rows: 1fr;
@@ -62,6 +68,7 @@
     grid-column: 2 / 3;
     position: relative;
     width: 75%;
+    align-self:center;
 
     @media only screen and (max-width: 1103px) {
       justify-self: center;

@@ -118,8 +118,10 @@ export const getActualData = async function(info) {
         state.current = data.current;
         state.forecast = data.forecast;
         state.weather = data;
-        state.weather.forecast.forecastday[0].hour = state.weather.forecast.forecastday[0].hour.slice(getHour(state.current.last_updated_epoch));
-
+        const hourToday = state.weather.forecast.forecastday[0].hour.slice(getHour(state.current.last_updated_epoch));
+        const hourTomorrow = state.weather.forecast.forecastday[1].hour.slice(0, getHour(state.current.last_updated_epoch));
+        state.weather.forecast.forecastday[0].hour = hourToday.concat(hourTomorrow);
+        
         saveSearchData();
 
     } catch (err) {
