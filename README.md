@@ -15,7 +15,10 @@ If you enjoy my project please leave a star.
 Step 1: Visit https://www.weatherapi.com/ <br>
 Step 2: Register or Login to account <br>
 Step 3: Visit your dashboard and copy API Key <br>
-Step 4: You need to replace variable "process.env.WEATHER_API_KEY" or create a ".env" file and there type: "WEATHER_API_KEY=HERE PLACE YOUR API KEY"<br>
+Step 4: Clone repository "git clone https://github.com/alemlodyigor/MyWeather" <br>
+Step 5: Create a ".env" file in main next to index.html and there type : "WEATHER_API_KEY=HERE PLACE YOUR API KEY" <br>
+Step 4: Run "npm install" <br>
+Step 5: Run "npm start" <br>
 
 And that's all, now you can use application!
 
